@@ -46,6 +46,7 @@ class IRC:
                     handler(formatted_response)
         except KeyboardInterrupt:
             sock.close()
+            exit()
 
 
 def log_chat(channel, verbose=False):
