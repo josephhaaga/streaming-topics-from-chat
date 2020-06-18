@@ -1,5 +1,3 @@
-# Borrowed from LearnDataSci
-
 import sys
 import logging
 

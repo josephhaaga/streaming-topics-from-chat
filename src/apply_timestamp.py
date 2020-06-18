@@ -13,3 +13,4 @@ if __name__ == "__main__":
     for line in sys.stdin:
         line = prepend_timestamp(line)
         sys.stdout.write(line)
+    sys.exit(0)
