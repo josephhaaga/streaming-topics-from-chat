@@ -19,11 +19,15 @@ def follow_the_stream(channel, verbose=False):
     irc_server = TwitchChat(nickname, token)
     irc_server.join_channel(channel)
     irc_server.listen_for_messages([
-        logging.info,
-        print,
-        look_for_economic_events
+        parse_economic_event
     ])
     exit()
+
+def parse_economic_event(message):
+    a = TwitchChat.parse_message(message)
+    if a:
+        print(f"{a['user']} said {a['text']}")
+
 
 def main():
     print(f"Using args {sys.argv}")

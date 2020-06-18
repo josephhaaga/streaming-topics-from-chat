@@ -1,4 +1,5 @@
 import socket
+import re
 
 from emoji import demojize
 
@@ -24,6 +25,7 @@ class IRC:
                 if resp.startswith("PING"):
                     sock.send("PONG\n".encode("utf-8"))
                 elif len(resp) > 0:
+                    # MAY BE MORE THAN ONE MESSAGE; NEED TO SPLIT WITH \n
                     formatted_response = demojize(resp)
                     for handler in handlers:
                         handler(formatted_response)
@@ -39,6 +41,14 @@ class TwitchChat(IRC):
 
     server = 'irc.chat.twitch.tv'
     port = 6667
+    pattern = re.compile(r':(.+)!(?:.+)@(?:.+)\.tmi\.twitch\.tv PRIVMSG (.+) \:(.+)')
 
     def __init__(self, nickname, token):
         super().__init__(self.server, self.port, nickname, token)
+
+    @classmethod
+    def parse_message(cls, message):
+        if "PRIVMSG" not in message:
+            return
+        user, channel, text = cls.pattern.findall(message)[0]
+        return {'user': user, 'channel': channel, 'text': text}
