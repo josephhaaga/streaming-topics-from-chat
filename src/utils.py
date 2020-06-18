@@ -11,6 +11,9 @@ class IRC:
         self.socket.send(f"NICK {nickname}\r\n".encode("utf-8"))
 
     def join_channel(self, channel):
+        if not channel.startswith('#'):
+            print("Channel must begin with #")
+            sys.exit(1)
         self.socket.send(f"JOIN {channel}\r\n".encode("utf-8"))
 
     def listen_for_messages(self, handlers):

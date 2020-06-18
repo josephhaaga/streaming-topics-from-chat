@@ -1,13 +1,7 @@
 import sys
-import logging
 
 from utils import TwitchChat
 
-
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s — %(message)s',
-                    datefmt='%Y-%m-%d_%H:%M:%S',
-                    handlers=[logging.FileHandler('chat.log', encoding='utf-8')])
 
 nickname = 'joehaaga'
 token = '<YOUR_TOKEN>'
@@ -15,12 +9,15 @@ token = '<YOUR_TOKEN>'
 with open('.token', 'r') as f:
     token = f.read().replace('\n', '')
 
-def log_chat(channel, verbose=False):
+def log_economic_events(message):
+    """Match the message to a beginbot template, and parse the event"""
+
+
+def monitor_the_economy(channel, verbose=False):
     irc_server = TwitchChat(nickname, token)
     irc_server.join_channel(channel)
     irc_server.listen_for_messages([
-        logging.info,
-        print
+        log_economic_events
     ])
     exit()
 
@@ -30,7 +27,7 @@ def main():
     if not channel.startswith('#'):
         print("Channel must begin with #")
         sys.exit(1)
-    print(f"Logging chat from {channel}")
+    print(f"Monitoring the economy on {channel}")
     log_chat(channel)
 
 if __name__ == '__main__':

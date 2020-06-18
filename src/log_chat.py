@@ -29,9 +29,6 @@ def log_chat(channel, verbose=False):
 def main():
     print(f"Using args {sys.argv}")
     channel = sys.argv[1]
-    if not channel.startswith('#'):
-        print("Channel must begin with #")
-        sys.exit(1)
     print(f"Logging chat from {channel}")
     log_chat(channel)
 
