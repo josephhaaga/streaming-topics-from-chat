@@ -1,0 +1,65 @@
+ACTIVISM
+    chat_thief/routers/revolution_router.py:                return f"The Will of the People have not chosen: {threshold} votes must be cast for either Peace or Revolution"
+        A user was eager to see election results; represents activism
+
+    chat_thief/routers/revolution_router.py:            return f"Thank you for your vote @{self.user}"
+        A user voted; represents activism
+
+    chat_thief/routers/community_router.py:        return f"Thank you @{self.user} for your proposal. You have 5 minutes to get {self.SUPPORT_REQUIREMENT} supporters"
+        A user proposed something; represents activism
+
+    chat_thief/models/proposal.py:            return f"Can't support yourself @{supporter}"
+        A user tried to support themself; represents activism and self-centeredness
+
+    chat_thief/models/proposal.py:            return f"You already supported! @{supporter}"
+        A user tried to re-support someone; represents activism and enthusiasm
+
+ANTI-SOCIAL BEHAVIOR
+    chat_thief/routers/cube_casino_router.py:                return f"NO BETS WHILE BEGINBOT IS SOLVING"
+        A user tried to cheat; represents anti-social behavior
+
+PRO-SOCIAL BEHAVIOR
+    chat_thief/routers/economy_router.py:        return f"Thanks for the custom CSS @{self.user}! {BASE_URL}/{self.user}.html"
+        A user contributed to the economy; represents pro-social behavior
+
+    chat_thief/routers/economy_router.py:            return f"Error Sharing - Command: {parser.target_sfx} | User: {parser.target_user}"
+        A user attempted to share a command and failed
+
+    chat_thief/routers/feedback_router.py:                return f"Thank You @{self.user} for your feedback, we will review and get back to you shortly"
+        A user submitted issue/bug/feature feedback; represents pro-social behavior
+
+    chat_thief/commands/command_sharer.py:            return f"{self.user} shared {perm_result}"
+    chat_thief/commands/command_sharer.py:                return f"{self.user} shared {perm_result}"
+        A user successfully shared; represents pro-social behavior
+
+    chat_thief/commands/command_sharer.py:                return f"{self.user} cannot add permissions"
+        A user shared but failed; represents pro-social behavior
+
+SENTIMENT
+    chat_thief/routers/economy_router.py:            return f"!{parser.target_sfx} supporters: {love_count} | detractors {hate_count}"
+        A user either "love"d or "hate"d a command; represents sentiment
+
+    chat_thief/routers/economy_router.py:            return f"We are not sure who or what you trying to hate. Maybe try and focusing your hate better next time @{self.user}"
+        A user attempted to "hate" and failed; represents negative overall sentiment
+
+CONCEIT
+    chat_thief/routers/economy_router.py:                return f"You can love yourself in real life, but not in Beginworld @{self.user}"
+        A user attempted to "love" themself; represents self-centeredness
+    
+ECONOMIC EVENT
+    chat_thief/commands/revolution.py:        return f"Power Transferred: {power_users} | {weaklings} | {bounty}"
+        Power was transferred from one set of users to another; represents a re-allocation of resouces, and a new ruling-class
+
+
+
+
+
+chat_thief/routers/feedback_router.py:            return f"Thank you for your request @{self.user}, beginbotbot will you inform you when !{sfx_request.command} is available"
+    A user attempted to use a soundeffect that is not yet approved; represents Early Adopter
+
+chat_thief/routers/feedback_router.py:                return f"Issue: {parser.doc_id} Deleted "
+    A Stream God deleted an issue; represents administrative action
+
+chat_thief/models/command.py:                return f"No One has accesss to !{self.name}"
+    A user tried to revoke someones access to a command and failed; represents censorship or punishment
+

@@ -25,9 +25,15 @@ def follow_the_stream(channel, verbose=False):
 
 def parse_economic_event(message):
     a = TwitchChat.parse_message(message)
-    if a:
-        print(f"{a['user']} said {a['text']}")
+    if not a:
+        return
+    user, channel, text = a
+    if user != 'beginbotbot':
+        return
+    match_text_to_event_handler(text)
 
+def match_text_to_event_handler(text):
+    raise NotImplementedError
 
 def main():
     print(f"Using args {sys.argv}")
