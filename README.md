@@ -17,6 +17,17 @@ Perform NLP on an IRC stream:
 ## ~~Proof of Concept~~
 1. set up NER and run it on an IRC stream, printing a running list of entities 
 	* entities that appear in the [same messages](https://github.com/JohnSnowLabs/spark-nlp-workshop/blob/master/tutorials/jupyter/4-%20Entity%20Recognizer%20DL.ipynb) are likely related, so we can draw an edge between them
-```
 
-```
+
+## follow_the_economy.py
+
+A script to identify messages from `beginbotbot`, and parse them into economic events (which have been loosely categorized in beginbot.economic.events.txt).
+
+The goal is to log economic events so we can discern market sentiment. We will log:
+    - market participants expressing sentiment (love/hate) towards products (soundeffects)
+    - market participants doing activism (proposing a coup, voting for/against a coup)
+    - pro-social and anti-social behavior
+
+From these news events, we can eventually plot market participants on a radar chart  of personality traits, and even assign a "social credit score".
+
+Then, Blackwater bot can use this information to track and predict potential dissidents
