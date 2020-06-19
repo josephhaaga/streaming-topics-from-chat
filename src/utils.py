@@ -25,10 +25,10 @@ class IRC:
                 if resp.startswith("PING"):
                     sock.send("PONG\n".encode("utf-8"))
                 elif len(resp) > 0:
-                    # MAY BE MORE THAN ONE MESSAGE; NEED TO SPLIT WITH \n
                     formatted_response = demojize(resp)
-                    for handler in handlers:
-                        handler(formatted_response)
+                    for message in formatted_response.split('\n'): # MAY BE MORE THAN ONE MESSAGE
+                        for handler in handlers:
+                            handler(message)
         except KeyboardInterrupt:
             sock.close()
             exit()
