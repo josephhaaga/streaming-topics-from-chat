@@ -7,7 +7,7 @@ from utils import TwitchChat
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s — %(message)s',
                     datefmt='%Y-%m-%d_%H:%M:%S',
-                    handlers=[logging.FileHandler('chat.log', encoding='utf-8')])
+                    handlers=[logging.FileHandler('event.log', encoding='utf-8')])
 
 nickname = 'joehaaga'
 token = '<YOUR_TOKEN>'
@@ -28,12 +28,51 @@ def parse_economic_event(message):
     if not a:
         return
     user, channel, text = a
-    if user != 'beginbotbot':
+    if a['user'] != 'beginbotbot':
         return
-    match_text_to_event_handler(text)
+    # logging.info(f"{text}") # We can just look at chat.log
+    match_text_to_event_handler(a['text'].lower())
+
+def print_and_log(event, text):
+    logging.info(f"A user {event}: {text}")
+    print(f"A user {event}: {text}")
+
 
 def match_text_to_event_handler(text):
-    raise NotImplementedError
+    print(f"parsing economic event: {text}")
+    if 'thank you' in text:
+        if 'proposal' in text:
+            # A user proposed something, representing activism
+            print_and_log("proposed something", text)
+        elif 'vote' in text:
+            # A user voted, representing activism
+            print_and_log("voted on something", text)
+        elif 'request' in text:
+            # An early adopter attempted to use a not yet approved soundeffect 
+            print_and_log("requested something", text)
+        elif 'feedback' in text:
+            # A user submitted issue/bug/feature feedback, representing labor
+            print_and_log("submitted feedback", text)
+        elif 'bet' in text:
+            print_and_log("bet at the casino", text)
+    elif 'stole from' in text:
+        print_and_log("stole", text)
+    elif 'was caught stealing' in text:
+        print_and_log("was caught stealing", text)
+    elif 'shared' in text:
+        # PRO-SOCIAL BEHAVIOR
+        print_and_log("shared", text)
+    elif 'bought' in text:
+        # A user purchased a product; represents commerce/a transaction
+        print_and_log("purchased something", text)
+    elif 'gave' in text:
+        print_and_log("donated something", text)
+    elif 'custom css' in text:
+        # A user submitted custom CSS, representing labor
+        print_and_log("submitted custom css", text)
+    elif 'NO BETS WHILE BEGINBOT IS SOLVING'.lower() in text:
+        # A user attempted to cheat, representing anti-social behavior
+        print_and_log("attempted to cheat at the casino", text)
 
 def main():
     print(f"Using args {sys.argv}")
