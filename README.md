@@ -19,7 +19,7 @@ Perform NLP on an IRC stream:
 	* entities that appear in the [same messages](https://github.com/JohnSnowLabs/spark-nlp-workshop/blob/master/tutorials/jupyter/4-%20Entity%20Recognizer%20DL.ipynb) are likely related, so we can draw an edge between them
 
 
-## follow_the_economy.py
+## `follow_the_economy.py`
 
 A script to identify messages from `beginbotbot`, and parse them into economic events (which have been loosely categorized in beginbot.economic.events.txt).
 
@@ -31,3 +31,9 @@ The goal is to log economic events so we can discern market sentiment. We will l
 From these news events, we can eventually plot market participants on a radar chart  of personality traits, and even assign a "social credit score".
 
 Then, Blackwater bot can use this information to track and predict potential dissidents
+
+## `construct_business_network.py`
+
+Updates a Neo4j graph with any beginworld chat events related to commerce (e.g. !give, !steal, !props etc.)
+
+Make sure you `docker-compose up` before running this script

@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  graphdb:
+    image: neo4j:latest
+    environment:
+      - NEO4J_AUTH=neo4j/test
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes: 
+      - ~/data/neo4j:/var/lib/neo4j/data
