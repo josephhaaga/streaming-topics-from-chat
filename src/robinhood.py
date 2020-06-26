@@ -7,7 +7,10 @@ sorted(a['users'].values(), key=lambda k: k['street_cred'])
 
 population = len(a['users'].values())
 
-the_one_percent = sorted(a['users'].values(), key = lambda k: k['cool_points'])[-1*(population//100):]
+uninsured_users = [x for x in a['users'].values() if 'insured' not in x]
+# the_one_percent = sorted(a['users'].values(), key = lambda k: k['cool_points'])[-1*(population//100):]
+the_one_percent = sorted(uninsured_users, key = lambda k: k['cool_points'])[-1*(population//100):]
+
 
 target = random.choice([person['name'] for person in the_one_percent])
 
@@ -18,8 +21,9 @@ commands = [x.replace(b'        <a href="https://mygeoangelfirespace.city/comman
 bounty = random.choice(commands).decode('utf8')
 
 # find a poor active player
-beneficiary = 'joehaaga'
+poor_players = sorted(a['users'].values(), key = lambda k: k['cool_points'])[:20]
 
 # print steal and give commands
 print(f"!steal @{target} {bounty}")
-
+for player in poor_players:
+    print(f"{player['name']}: {player['cool_points']} cool points")
